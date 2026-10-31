@@ -3,7 +3,7 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .profile-img {
-    max-height: 450px;
+    max-height: 500px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
