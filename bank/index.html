@@ -55,7 +55,9 @@
             <div class="row mb-3 align-items-center">
                 <label class="col-md-4 col-form-label">ACCOUNT NUMBER</label>
                 <div class="col-md-8">
-                    <input type="number" id="acc" class="form-control" placeholder="ENTER ACCOUNT NUMBER">
+                    <input type="number" id="acc" class="form-control"
+placeholder="ENTER ACCOUNT NUMBER"
+oninput="if(this.value.startsWith('0')) this.value=''">
                     <small style="color:red; display: none; " id="idNoEror"><i class="fa-solid fa-circle-exclamation me-2"></i>PLESE  ENTER ACCOUNT NUMBER</small>
                 </div>
             </div>
@@ -82,7 +84,7 @@
             <div class="row mb-3 align-items-center">
                 <label class="col-md-4 col-form-label">BALANCE</label>
                 <div class="col-md-8">
-                    <input type="number" id="blc" class="form-control" placeholder="ENTER BALANCE">
+                    <input type="number" id="blc" class="form-control" placeholder="ENTER BALANCE" oninput="if(this.value < 0) this.value = 0">
                     <small style="color:red; display:none;" id="blcEror"><i class="fa-solid fa-circle-exclamation me-2"></i>
                     PLESE  ENTER BALNACE</small>
                 </div>
@@ -101,9 +103,11 @@
         <div class="card p-4 shadow-sm">
 
             <h4 class="text-center mb-4">DEPOSIT AMOUNT</h4>
-            <input type="number" id="depositAcc" class="form-control mb-3" placeholder="Account Number">
+            <input type="number" id="depositAcc" class="form-control mb-3"
+placeholder="Account Number"
+oninput="if(this.value.startsWith('0')) this.value=''">
 
-            <input type="number" id="depositAmount" class="form-control mb-3" placeholder="Enter Amount">
+            <input type="number" id="depositAmount" class="form-control mb-3" placeholder="Enter Amount" oninput="if(this.value < 0) this.value = 0">
 
             <button class="btn text-white" style="background-color: #4ADE80;" onclick="Deposit()"><i class="fa-solid fa-arrow-down me-2"></i>DEPOSIT</button>
 
@@ -202,9 +206,11 @@
 
             <h4 class="text-center mb-4">WITHDRAW AMOUNT</h4>
 
-            <input type="number" id="withdrawAcc" class="form-control mb-3" placeholder="Account Number">
+            <input type="number" id="withdrawAcc" class="form-control mb-3"
+placeholder="Account Number"
+oninput="if(this.value.startsWith('0')) this.value=''">
 
-            <input type="number" id="withdrawAmount" class="form-control mb-3" placeholder="Enter Amount">
+            <input type="number" id="withdrawAmount" class="form-control mb-3" placeholder="Enter Amount" oninput="if(this.value < 0) this.value = 0">
 
             <button class="btn btn-danger" onclick="WithDraw()"><i class="fa-solid fa-arrow-up me-2"></i>WITHDRAW</button>
         </div>
@@ -286,9 +292,9 @@
         <h4 class="text-center mb-4">ACCOUNT DETAILS</h4>
 
         <div class="d-flex gap-2 mb-4">
-            <input type="number" id="detailsAcc"
-                   class="form-control"
-                   placeholder="Enter Account Number">
+            <input type="number" id="detailsAcc" class="form-control"
+placeholder="Enter Account Number"
+oninput="if(this.value.startsWith('0')) this.value=''">
 
             <button class="btn btn-primary px-4" onclick="Search()">
                 SEARCH
@@ -377,9 +383,9 @@
                     <div class="card-body">
 
                         <label class="form-label">ACCOUNT NUMBER</label>
-                        <input type="number" id="fromAcc"
-                               class="form-control mb-3"
-                               placeholder="Sender Account Number">
+                        <input type="number" id="fromAcc" class="form-control mb-3"
+placeholder="Sender Account Number"
+oninput="if(this.value.startsWith('0')) this.value=''">
 
                     </div>
 
@@ -412,9 +418,9 @@
                     <div class="card-body">
 
                         <label class="form-label">ACCOUNT NUMBER</label>
-                        <input type="number" id="toAcc"
-                               class="form-control mb-3"
-                               placeholder="Receiver Account Number">
+<input type="number" id="toAcc" class="form-control mb-3"
+placeholder="Receiver Account Number"
+oninput="if(this.value.startsWith('0')) this.value=''">
                     </div>
 
                 </div>
@@ -438,7 +444,7 @@
                     <input type="number"
                            id="transferAmount"
                            class="form-control mb-3"
-                           placeholder="Enter Amount">
+                           placeholder="Enter Amount"oninput="if(this.value < 0) this.value = 0">
 
                     <button class="btn btn-primary w-100"
                             onclick="Transfer()">

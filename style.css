@@ -2,6 +2,12 @@
     color: white;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
+.profile-img {
+    max-height: 450px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 0;
@@ -9,8 +15,11 @@ html {
 body {
     overflow-x: hidden;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    caret-color: transparent;
+     caret-color: transparent;
+    
 }
+
+
 input{
     caret-color: #EC4899;
 }
@@ -30,6 +39,21 @@ html {
     font-size: 14px;
     font-weight: 600;
     white-space: nowrap;
+}
+.btn-zoom-effect {
+    animation: btnZoom 1.5s ease-in-out 0.3s both;
+}
+
+@keyframes btnZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 #home,
@@ -68,6 +92,8 @@ a {
 .nav-item:hover{
     border-bottom:2px solid purple !important ;
 }
+
+
 .form-control::placeholder {
     color: white;
     opacity: 1;

@@ -1,7 +1,9 @@
 function showPage(pageId) {
 
     let pages = document.querySelectorAll(".page");
-
+    document.querySelector("#blcEror").style.display = "none";
+    document.querySelector("#idNoEror").style.display="none";
+    document.querySelector("#nameEror").style.display="none";
     for (let i = 0; i < pages.length; i++) {
 
         if (pages[i].id === pageId) {
@@ -14,15 +16,32 @@ function showPage(pageId) {
     }
 }
 
+function checkZero(id) {
+    let value = document.querySelector(id).value;
+
+    if (value === "" || value.startsWith("0") ||
+        !Number.isInteger(Number(value)) || Number(value) <= 0) {
+        alert("plese fill all info");
+        return false;
+    }
+
+    return true;
+}
+
+
 let accountsList = [];
 function my() {
-
+   if (!checkZero("#acc"))
+        return;
     let accountNo = Number(document.querySelector("#acc").value);
 
     let name = document.querySelector("#nam").value;
 
     let accountType = document.querySelector("#accountType").value;
     let balance = Number(document.querySelector("#blc").value);
+
+
+
 
        if (accountNo === 0) {
             document.querySelector("#idNoEror").style.display="block";
@@ -33,10 +52,10 @@ function my() {
             return;
         }
 
-        if (balance===0) {
-            document.querySelector("#blcEror").style.display="block";
-            return;
-        }
+if (balance <= 0 || !Number.isFinite(balance)) {
+    document.querySelector("#blcEror").style.display = "block";
+    return;
+}
 
 
     for(let i=0;i<accountsList.length;i++){
@@ -191,9 +210,10 @@ class SavingAccount extends accounts {
  
 
         withdraw(amount){
-            if (amount<=0) {
-                alert("THIS IS NOT A JOKE")
-            }
+if (amount <= 0 || !Number.isFinite(amount)) {
+    alert("Invalid Amount");
+    return;
+}
             if (amount>=this.balance) {
             alert("Insufficient Balance");
               return;
@@ -315,7 +335,7 @@ class CurrentAccount extends accounts {
         
         }
  deposit(amount) {
-
+document.querySelector("#depositOverdraftDetails").style.display = "none";
     if (amount <= 0) {
         alert("PLEASE SIR");
         return;
@@ -362,7 +382,7 @@ class CurrentAccount extends accounts {
     document.querySelector("#Previousbncl").innerText = "₹" + previousBalance;
     document.querySelector("#depositamount").innerText = "₹" + amount;
     document.querySelector("#depositTotal").innerText = "₹" + this.balance;
-
+    document.querySelector("#DEPOSITDetails").style.display = "block";
 
 
     if (oldOverdraft > 0) {
@@ -380,7 +400,7 @@ class CurrentAccount extends accounts {
         document.querySelector("#depositRemainingDue").innerText = "₹" + (totalDue - deducted).toFixed(2);
 
         document.querySelector("#depositOverdraftDetails").style.display = "block";
-        document.querySelector("#DEPOSITDetails").style.display = "block";
+       // document.querySelector("#DEPOSITDetails").style.display = "block";
 
     } else {
 
@@ -401,7 +421,8 @@ function WithDraw() {
     document.querySelector("#withDetails").style.display = "none";
     let accountNo = Number(document.querySelector("#withdrawAcc").value);
     let Amount = Number(document.querySelector("#withdrawAmount").value);
-
+     if (!checkZero("#withdrawAcc"))
+      return;
     for (let i = 0; i < accountsList.length; i++) {
         if (accountsList[i].accountNo === accountNo) {
             accountsList[i].withdraw(Amount);
@@ -418,7 +439,8 @@ function Deposit() {
 
     let accountNo = Number(document.querySelector("#depositAcc").value);
     let Amount = Number(document.querySelector("#depositAmount").value);
-
+     if (!checkZero("#depositAcc")) 
+        return;
     for (let i = 0; i < accountsList.length; i++) {
 
         if (accountsList[i].accountNo === accountNo) {
@@ -439,7 +461,8 @@ function Search() {
     let detailsAcc = Number(document.querySelector("#detailsAcc").value);
     let accountDetails = document.querySelector("#accountDetails");
         accountDetails.style.display = "none";
-
+            if (!checkZero("#detailsAcc")) 
+                return;
    // document.querySelector("#accountDetails").style.display = "none";
 
     for (let i = 0; i < accountsList.length; i++) {
@@ -493,7 +516,8 @@ function Transfer() {
     let amount = Number(document.querySelector("#transferAmount").value);
 
     document.querySelector("#transferDetails").style.display = "none";
-
+    if (!checkZero("#fromAcc")) return;
+    if (!checkZero("#toAcc")) return;
     if (fromAcc <= 0 || toAcc <= 0 || amount <= 0 ||
         !Number.isFinite(fromAcc) ||
         !Number.isFinite(toAcc) ||
@@ -544,6 +568,18 @@ function Transfer() {
         sender.costomerName + " To " + receiver.costomerName +
         "\nSender Remaining Balance: ₹" + sender.balance;
 
+let message = amount + " Rupees Transferred Successfully From " +
+    sender.costomerName + " To " + receiver.costomerName +
+    ". Sender Remaining Balance: " + sender.balance + " Rupees";
+
+let voice = new SpeechSynthesisUtterance(message);
+
+voice.lang = "en-IN";
+
+
+speechSynthesis.speak(voice);
+
+
     document.querySelector("#transferDetails").style.display = "block";
 
     document.querySelector("#fromAcc").value = "";
@@ -554,3 +590,4 @@ function Transfer() {
 
 
 }
+
